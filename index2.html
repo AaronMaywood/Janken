@@ -1,0 +1,30 @@
+<h1>全自動じゃんけん</h1>
+<p>じゃんけん...ぽん！</p>
+<p id="play"></p>
+<p id="judge"></p>
+<script>
+const hand = ['👊','✌','✋']
+const player1 = hand[Math.floor(Math.random()*3)]
+const player2 = hand[Math.floor(Math.random()*3)]
+
+const play = document.getElementById('play')
+const judge = document.getElementById('judge')
+
+play.innerText = `PLAYER1:${player1} PLAYER2:${player2}`
+
+if( player1 === player2 ){
+	judge.innerText = 'あいこ'
+}else if( player1 === '👊' && player2 === '✌'){
+	judge.innerText = 'PLAYER1の勝ち！'
+}else if( player1 === '👊' && player2 === '✋'){
+	judge.innerText = 'PLAYER2の勝ち！'
+}else if( player1 === '✌' && player2 === '👊'){
+	judge.innerText = 'PLAYER2の勝ち！'
+}else if( player1 === '✌' && player2 === '✋'){
+	judge.innerText = 'PLAYER1の勝ち！'
+}else if( player1 === '✋' && player2 === '👊'){
+	judge.innerText = 'PLAYER1の勝ち！'
+}else if( player1 === '✋' && player2 === '✌'){
+	judge.innerText = 'PLAYER2の勝ち！'
+}
+</script>
