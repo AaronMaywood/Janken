@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コンピューター対戦じゃんけん</title>
+	<style>
+		input[type="radio"] {
+			display: none;
+		}
+
+		#result,
+		#gameover {
+			display: none;
+		}
+
+		#gameover {
+			font-size: 2rem;
+		}
+	</style>
+</head>
+<body>
+	<h1>コンピューター対戦じゃんけん</h1>
+	<p><small>最大で20試合し、得点の高い方か、先に10点取った方がゲームの勝者です。</small></p>
+	<p>対戦回数: <span id="game_counter">1</span>回目/20回
+	あなた：<meter min="0" max="10" value="0" high="8" id="player1_meter"></meter> (<span id="player1_meter_value">0</span>点)
+	コンピューター：<meter min="0" max="10" value="0" high="8" id="player2_meter"></meter> (<span id="player2_meter_value">0</span>点)</p>
+	<div id="select_hand">
+		<p>じゃんけん...</p>
+		<p>あなた:
+			<label><input type="radio" name="hand" value="👊"><img src="images/janken_gu.png" width="64" alt=""></label>
+			<label><input type="radio" name="hand" value="✌"><img src="images/janken_choki.png" width="64" alt=""></label>
+			<label><input type="radio" name="hand" value="✋"><img src="images/janken_pa.png" width="64" alt=""></label>
+		</p>
+	</div>
+	<div id="result">
+		<p>じゃんけん...ぽん！</p>
+		<p id="play"></p>
+		<p id="judge"></p>
+		<div id="restart_button">
+			<hr>
+			<button type="button" id="restart">再チャレンジ</button>
+		</div>
+	</div>
+	<div id="gameover">
+		<hr>
+		<p>ゲーム終了</p>
+		<p>ゲームの勝者は ... <span id="winner"></span>です！</p>
+		<button type="button" id="restart_game">もう一度プレイする</button>
+	</div>
+	<script>
+	let counter = 1
+	let player1_win = 0
+	let player2_win = 0
+	const hand = ['👊','✌','✋']
+	const hand_img = [
+		'<img src="images/janken_gu.png" width="64" alt="">',
+		'<img src="images/janken_choki.png" width="64" alt="">',
+		'<img src="images/janken_pa.png" width="64" alt="">'
+	]
+
+	const user_hand = document.querySelectorAll('[name=hand]')
+	user_hand.forEach( i => i.addEventListener('click', e => judge() ))
+
+	function judge(){
+		let player1_index
+		if(user_hand[0].checked === true){
+			player1_index = 0
+		}else if(user_hand[1].checked === true){
+			player1_index = 1
+		}else{
+			player1_index = 2
+		}
+
+		const player2_index = Math.floor(Math.random()*3)
+		const player1 = hand[player1_index]
+		const player2 = hand[player2_index]
+
+		const play = document.getElementById('play')
+		const judge = document.getElementById('judge')
+
+		play.innerHTML = `あなた:${hand_img[player1_index]}<br>コンピューター:${hand_img[player2_index]}`
+
+		if( player1 === player2 ){
+			judge.innerText = 'あいこ'
+		}else if( player1 === '👊' && player2 === '✌'){
+			judge.innerText = 'あなたの勝ち！'
+			player1_win++
+		}else if( player1 === '👊' && player2 === '✋'){
+			judge.innerText = 'コンピューターの勝ち！'
+			player2_win++
+		}else if( player1 === '✌' && player2 === '👊'){
+			judge.innerText = 'コンピューターの勝ち！'
+			player2_win++
+		}else if( player1 === '✌' && player2 === '✋'){
+			judge.innerText = 'あなたの勝ち！'
+			player1_win++
+		}else if( player1 === '✋' && player2 === '👊'){
+			judge.innerText = 'あなたの勝ち！'
+			player1_win++
+		}else if( player1 === '✋' && player2 === '✌'){
+			judge.innerText = 'コンピューターの勝ち！'
+			player2_win++
+		}
+
+		// メーター進捗
+		const player1_meter = document.getElementById('player1_meter')
+		const player2_meter = document.getElementById('player2_meter')
+		player1_meter.value = player1_win
+		player2_meter.value = player2_win
+		const player1_meter_value = document.getElementById('player1_meter_value')
+		const player2_meter_value = document.getElementById('player2_meter_value')
+		player1_meter_value.innerHTML = player1_win
+		player2_meter_value.innerHTML = player2_win
+
+		// 表示切り替え
+		const select_hand = document.getElementById('select_hand')
+		const result = document.getElementById('result')
+		select_hand.style.display = 'none'
+		result.style.display = 'block'
+
+		// ゲームの終了処理
+		// 先に10点とるか、20回試合した場合はゲームオーバーです
+		if(player1_win >= 10 || player2_win >= 10 || counter === 20){
+			gameover()
+		}
+	}
+
+	function gameover(){
+		// 表示切り替え
+		const restart_button = document.getElementById('restart_button')
+		const gameover = document.getElementById('gameover')
+		restart_button.style.display = 'none'
+		gameover.style.display = 'block'
+		const winner = document.getElementById('winner')
+		if(player1_win === player2_win){
+			winner.innerHTML = 'ひきわけ'
+		}else{
+			winner.innerHTML = player1_win > player2_win ? 'プレイヤー' : 'コンピューター'
+		}
+
+		// 状態初期化
+		counter = 0
+		player1_win = 0
+		player2_win = 0
+	}
+
+	const restart_game = document.getElementById('restart_game')
+	restart_game.addEventListener('click', e => {
+		reset()
+	})
+
+	const restart = document.getElementById('restart')
+	restart.addEventListener('click', e => {
+		reset()
+	})
+
+	function reset(){
+		// 状態を初期化
+		user_hand.forEach( i => i.checked = false)
+		// 表示切り替え
+		const select_hand = document.getElementById('select_hand')
+		const result = document.getElementById('result')
+		select_hand.style.display = 'block'
+		result.style.display = 'none'
+		const player1_meter = document.getElementById('player1_meter')
+		const player2_meter = document.getElementById('player2_meter')
+		player1_meter.value = player1_win
+		player2_meter.value = player2_win
+		const player1_meter_value = document.getElementById('player1_meter_value')
+		const player2_meter_value = document.getElementById('player2_meter_value')
+		player1_meter_value.innerHTML = player1_win
+		player2_meter_value.innerHTML = player2_win
+		const restart_button = document.getElementById('restart_button')
+		const gameover = document.getElementById('gameover')
+		restart_button.style.display = 'block'
+		gameover.style.display = 'none'
+		// 対戦回数を加算
+		const game_counter = document.getElementById('game_counter')
+		game_counter.innerHTML = ++counter
+	}
+	</script>
+</body>
+</html>
