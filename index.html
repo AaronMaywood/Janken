@@ -1,24 +1,34 @@
-<script>
-const hand = ['👊','✌','✋']
-const player1 = hand[Math.floor(Math.random()*3)]
-const player2 = hand[Math.floor(Math.random()*3)]
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全自動じゃんけん</title>
+</head>
+<body>
+	<script>
+		const hand = ['👊','✌','✋']
+		const player1 = hand[Math.floor(Math.random()*3)]
+		const player2 = hand[Math.floor(Math.random()*3)]
 
-console.log('じゃんけん...ぽん！')
-console.log(`PLAYER1:${player1} PLAYER2:${player2}`)
+		console.log('じゃんけん...ぽん！')
+		console.log(`PLAYER1:${player1} PLAYER2:${player2}`)
 
-if( player1 === player2 ){
-	console.log('あいこ')
-}else if( player1 === '👊' && player2 === '✌'){
-	console.log('PLAYER1の勝ち！')
-}else if( player1 === '👊' && player2 === '✋'){
-	console.log('PLAYER2の勝ち！')
-}else if( player1 === '✌' && player2 === '👊'){
-	console.log('PLAYER2の勝ち！')
-}else if( player1 === '✌' && player2 === '✋'){
-	console.log('PLAYER1の勝ち！')
-}else if( player1 === '✋' && player2 === '👊'){
-	console.log('PLAYER1の勝ち！')
-}else if( player1 === '✋' && player2 === '✌'){
-	console.log('PLAYER2の勝ち！')
-}
-</script>
+		if( player1 === player2 ){
+			console.log('あいこ')
+		}else if( player1 === '👊' && player2 === '✌'){
+			console.log('PLAYER1の勝ち！')
+		}else if( player1 === '👊' && player2 === '✋'){
+			console.log('PLAYER2の勝ち！')
+		}else if( player1 === '✌' && player2 === '👊'){
+			console.log('PLAYER2の勝ち！')
+		}else if( player1 === '✌' && player2 === '✋'){
+			console.log('PLAYER1の勝ち！')
+		}else if( player1 === '✋' && player2 === '👊'){
+			console.log('PLAYER1の勝ち！')
+		}else if( player1 === '✋' && player2 === '✌'){
+			console.log('PLAYER2の勝ち！')
+		}
+	</script>
+</body>
+</html

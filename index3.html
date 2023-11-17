@@ -1,37 +1,48 @@
-<h1>全自動じゃんけん</h1>
-<p>じゃんけん...ぽん！</p>
-<p id="play"></p>
-<p id="judge"></p>
-<script>
-const hand = ['👊','✌','✋']
-const hand_img = [
-	'<img src="images/janken_gu.png" width="64" alt="">',
-	'<img src="images/janken_choki.png" width="64" alt="">',
-	'<img src="images/janken_pa.png" width="64" alt="">'
-]
-const player1_index = Math.floor(Math.random()*3)
-const player2_index = Math.floor(Math.random()*3)
-const player1 = hand[player1_index]
-const player2 = hand[player2_index]
 
-const play = document.getElementById('play')
-const judge = document.getElementById('judge')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全自動じゃんけん</title>
+</head>
+<body>
+	<h1>全自動じゃんけん</h1>
+	<p>じゃんけん...ぽん！</p>
+	<p id="play"></p>
+	<p id="judge"></p>
+	<script>
+		const hand = ['👊','✌','✋']
+		const hand_img = [
+			'<img src="images/janken_gu.png" width="64" alt="">',
+			'<img src="images/janken_choki.png" width="64" alt="">',
+			'<img src="images/janken_pa.png" width="64" alt="">'
+		]
+		const player1_index = Math.floor(Math.random()*3)
+		const player2_index = Math.floor(Math.random()*3)
+		const player1 = hand[player1_index]
+		const player2 = hand[player2_index]
 
-play.innerHTML = `PLAYER1:${hand_img[player1_index]} PLAYER2:${hand_img[player2_index]}`
+		const play = document.querySelector('#play')
+		const judge = document.querySelector('#judge')
 
-if( player1 === player2 ){
-	judge.innerText = 'あいこ'
-}else if( player1 === '👊' && player2 === '✌'){
-	judge.innerText = 'PLAYER1の勝ち！'
-}else if( player1 === '👊' && player2 === '✋'){
-	judge.innerText = 'PLAYER2の勝ち！'
-}else if( player1 === '✌' && player2 === '👊'){
-	judge.innerText = 'PLAYER2の勝ち！'
-}else if( player1 === '✌' && player2 === '✋'){
-	judge.innerText = 'PLAYER1の勝ち！'
-}else if( player1 === '✋' && player2 === '👊'){
-	judge.innerText = 'PLAYER1の勝ち！'
-}else if( player1 === '✋' && player2 === '✌'){
-	judge.innerText = 'PLAYER2の勝ち！'
-}
-</script>
+		play.innerHTML = `PLAYER1:${hand_img[player1_index]} PLAYER2:${hand_img[player2_index]}`
+
+		if( player1 === player2 ){
+			judge.innerHTML = 'あいこ'
+		}else if( player1 === '👊' && player2 === '✌'){
+			judge.innerHTML = 'PLAYER1の勝ち！'
+		}else if( player1 === '👊' && player2 === '✋'){
+			judge.innerHTML = 'PLAYER2の勝ち！'
+		}else if( player1 === '✌' && player2 === '👊'){
+			judge.innerHTML = 'PLAYER2の勝ち！'
+		}else if( player1 === '✌' && player2 === '✋'){
+			judge.innerHTML = 'PLAYER1の勝ち！'
+		}else if( player1 === '✋' && player2 === '👊'){
+			judge.innerHTML = 'PLAYER1の勝ち！'
+		}else if( player1 === '✋' && player2 === '✌'){
+			judge.innerHTML = 'PLAYER2の勝ち！'
+		}
+	</script>
+</body>
+</html>
