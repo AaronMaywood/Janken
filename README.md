@@ -37,9 +37,5 @@ https://i.gyazo.com/51d7914019d991622200d128f9b03107.png
 ## index3.html
 
 絵文字ではなく、画像素材を使用して以下のような表示にします。
-https://i.gyazo.com/c7d4482e48a429b0989d565afa86b648.png
 
-画像素材は「かわいいフリー素材集　いらすとや」の以下のものを使用してください。
-https://www.irasutoya.com/2013/07/blog-post_5608.html
-
-
+https://i.gyazo.com/9e148f08b6ef7a9c520bbcf88c490efb.png
